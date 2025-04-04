@@ -1,18 +1,7 @@
 import pulumi
-import pulumi_github as github
+from repo import repo
+import file  # Import file.py to run the file creation logic
 
-# Define the GitHub repository
-repo = github.Repository("my-repo",
-    name="my-repo",
-    description="A Pulumi-managed GitHub repository",
-    visibility="public"
-)
-
-# Define branch protection (without required PR reviews)
-branch_protection = github.BranchProtection("my-repo-protection",
-    repository_id=repo.name,
-    pattern="main"
-)
-
-# Export the repository name
+# Export the repository name and URL
 pulumi.export("repo_name", repo.name)
+pulumi.export("repo_url", repo.html_url)

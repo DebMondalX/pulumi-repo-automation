@@ -1,0 +1,18 @@
+import pulumi
+import pulumi_github as github
+from repo import exported_repo
+import time
+
+# Optional: Wait for a brief time to ensure repository is initialized before creating files.
+time.sleep(10)  # Adjust the time based on the repository creation time
+
+# Create the file within the existing repository
+repository_file = github.RepositoryFile("file-in-repo",
+    repository=exported_repo.name,  # Use the repo created in repo.py
+    file="example-file.txt",
+    branch="main",  # Ensure the main branch is available
+    content="Hello, Pulumi!",
+    commit_message="Add example file"
+)
+
+pulumi.export("repository_url", exported_repo.html_url)
