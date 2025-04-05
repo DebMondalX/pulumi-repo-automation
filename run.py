@@ -2,8 +2,8 @@ import pulumi.automation as auto
 import os
 
 def pulumi_program():
-    import repo  # This triggers your Pulumi resources to be created from repo.py
-    import file  # This will create the README or other files
+    import repo  
+    import file  
 
 def run():
     repo_name = input("📦 Enter repository name: ")
@@ -15,7 +15,7 @@ def run():
     stack = auto.create_or_select_stack(
         stack_name="dev",
         project_name="github-repo",
-        program=pulumi_program  # Here's the fix!
+        program=pulumi_program  
     )
 
     print("🔧 Setting config...")
