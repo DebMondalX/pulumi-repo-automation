@@ -54,15 +54,11 @@ Run the script:
 
 #### Pulumi will then:
 
-Spin up the stack
-
-Set config values dynamically
-
-Create the repo
-
-Add an example file
-
-Output the repo URL  
+- Spin up the stack
+- Set config values dynamically
+- Create the repo
+- Add an example file
+- Output the repo URL  
 
 ---
 ## 💡 Use Cases
