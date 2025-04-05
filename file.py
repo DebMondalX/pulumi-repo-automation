@@ -12,7 +12,8 @@ repository_file = github.RepositoryFile("file-in-repo",
     file="example-file.txt",
     branch="main",  
     content="Hello, Pulumi!",
-    commit_message="Add example file"
+    commit_message="Add example file",
+    overwrite_on_create=True
 )
 
 pulumi.export("repository_url", exported_repo.html_url)

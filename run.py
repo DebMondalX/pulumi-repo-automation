@@ -11,12 +11,19 @@ def run():
     visibility = input("🔐 Should the repo be private? (yes/no): ").strip().lower()
     is_private = visibility == "yes"
 
+    stack_name = "dev"
+    project_name = "github-repo"
+
     # Create or select stack
     stack = auto.create_or_select_stack(
-        stack_name="dev",
-        project_name="github-repo",
-        program=pulumi_program  
+        stack_name=stack_name,
+        project_name=project_name,
+        program=pulumi_program
     )
+
+    stack.refresh(on_output=print)
+    print("💣 Destroying previous stack resources (if any)...")
+    stack.destroy(on_output=print)
 
     print("🔧 Setting config...")
     stack.set_config("repoName", auto.ConfigValue(value=repo_name))
@@ -24,10 +31,16 @@ def run():
     stack.set_config("repoPrivate", auto.ConfigValue(value=str(is_private).lower()))
 
     print("🔄 Installing dependencies...")
-    os.system("pip install -r requirements.txt")  # Make sure dependencies are installed
+    os.system("pip install -r requirements.txt")
 
     print("🚀 Running Pulumi up...")
-    up_res = stack.up(on_output=print)
+
+    try:
+        up_res = stack.up(on_output=print)
+    except Exception as e:
+        print("❌ Pulumi up failed:")
+        print(e)
+        return
 
     print("\n✅ Repo Created!")
     print(f"📦 Repo Name: {up_res.outputs['repo_name'].value}")
