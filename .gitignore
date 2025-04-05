@@ -3,3 +3,6 @@ __pycache__/
 *.pyc
 .env
 pulumi*.yaml # If not already added
+
+# Pulumi secret files
+pulumi*.yaml
