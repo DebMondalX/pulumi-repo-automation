@@ -9,10 +9,10 @@ time.sleep(10)
 # Create the file within the existing repository
 repository_file = github.RepositoryFile("file-in-repo",
     repository=exported_repo.name,  # Use the repo created in repo.py
-    file="example-file.txt",
+    file="sample-file.txt",
     branch="main",  
     content="Hello, Pulumi!",
-    commit_message="Add example file",
+    commit_message="Adding an example file",
     overwrite_on_create=True
 )
 
